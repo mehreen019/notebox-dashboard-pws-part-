@@ -11,8 +11,9 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
@@ -24,8 +25,9 @@ class Ui_dashboardClass
 {
 public:
     QWidget *centralWidget;
+    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout_2;
     QPushButton *noteAdd;
-    QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -33,17 +35,25 @@ public:
     {
         if (dashboardClass->objectName().isEmpty())
             dashboardClass->setObjectName(QString::fromUtf8("dashboardClass"));
-        dashboardClass->resize(486, 400);
+        dashboardClass->resize(489, 383);
         centralWidget = new QWidget(dashboardClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        horizontalLayout = new QHBoxLayout(centralWidget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         noteAdd = new QPushButton(centralWidget);
         noteAdd->setObjectName(QString::fromUtf8("noteAdd"));
-        noteAdd->setGeometry(QRect(170, 110, 151, 61));
+
+        gridLayout_2->addWidget(noteAdd, 0, 0, 1, 1);
+
+
+        horizontalLayout->addLayout(gridLayout_2);
+
         dashboardClass->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(dashboardClass);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 486, 26));
-        dashboardClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(dashboardClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
         dashboardClass->addToolBar(Qt::TopToolBarArea, mainToolBar);

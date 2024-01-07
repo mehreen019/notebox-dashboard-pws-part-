@@ -10,11 +10,14 @@
 #define UI_BUTTON_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
@@ -27,6 +30,7 @@ class Ui_buttonClass
 {
 public:
     QWidget *centralWidget;
+    QHBoxLayout *horizontalLayout;
     QGroupBox *groupBox;
     QPushButton *upload;
     QLabel *label;
@@ -35,6 +39,7 @@ public:
     QLineEdit *lineEdit_date;
     QPushButton *submit_info;
     QMenuBar *menuBar;
+    QMenu *menunote_upload;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -42,12 +47,15 @@ public:
     {
         if (buttonClass->objectName().isEmpty())
             buttonClass->setObjectName(QString::fromUtf8("buttonClass"));
-        buttonClass->resize(600, 400);
+        buttonClass->resize(555, 498);
         centralWidget = new QWidget(buttonClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        horizontalLayout = new QHBoxLayout(centralWidget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(140, 10, 321, 301));
         upload = new QPushButton(groupBox);
         upload->setObjectName(QString::fromUtf8("upload"));
         upload->setGeometry(QRect(80, 170, 161, 41));
@@ -67,10 +75,15 @@ public:
         submit_info = new QPushButton(groupBox);
         submit_info->setObjectName(QString::fromUtf8("submit_info"));
         submit_info->setGeometry(QRect(20, 230, 281, 51));
+
+        horizontalLayout->addWidget(groupBox);
+
         buttonClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(buttonClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 26));
+        menuBar->setGeometry(QRect(0, 0, 555, 26));
+        menunote_upload = new QMenu(menuBar);
+        menunote_upload->setObjectName(QString::fromUtf8("menunote_upload"));
         buttonClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(buttonClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -84,6 +97,8 @@ public:
 #endif // QT_CONFIG(shortcut)
         QWidget::setTabOrder(lineEdit_title, lineEdit_date);
         QWidget::setTabOrder(lineEdit_date, upload);
+
+        menuBar->addAction(menunote_upload->menuAction());
 
         retranslateUi(buttonClass);
 
@@ -101,6 +116,7 @@ public:
         label->setText(QCoreApplication::translate("buttonClass", "title", nullptr));
         label_2->setText(QCoreApplication::translate("buttonClass", "date", nullptr));
         submit_info->setText(QCoreApplication::translate("buttonClass", "Submit", nullptr));
+        menunote_upload->setTitle(QCoreApplication::translate("buttonClass", "note upload", nullptr));
     } // retranslateUi
 
 };

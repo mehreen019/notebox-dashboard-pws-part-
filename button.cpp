@@ -29,7 +29,7 @@ void button::ffs_click() {
     
     
     
-    std::string p = picpath.toLocal8Bit().constData();
+    /*std::string p = picpath.toLocal8Bit().constData();
     const char* char_p = p.c_str();
     //QMessageBox::information(this, "runs", picpath);
 
@@ -38,7 +38,7 @@ void button::ffs_click() {
 
     if (!tempfile) {
             QMessageBox::information(this, "failed", "pic has not been loaded");
-    }
+    }*/
 
 
     /*QImage image;

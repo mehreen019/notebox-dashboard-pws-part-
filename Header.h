@@ -6,3 +6,5 @@
 #include<QDialog>
 #include<qmessagebox>
 #include<QtDebug>
+#include<QVector>
+#include<qpixmap.h>

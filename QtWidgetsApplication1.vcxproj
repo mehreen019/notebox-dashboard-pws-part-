@@ -89,18 +89,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cell.cpp" />
     <ClCompile Include="dashboard.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="notes.cpp" />
     <QtRcc Include="button.qrc" />
     <QtUic Include="button.ui" />
     <QtMoc Include="button.h" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="cell.ui" />
     <QtUic Include="dashboard.ui" />
+    <QtUic Include="image.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="dashboard.h" />
+    <QtMoc Include="cell.h" />
     <ClInclude Include="Header.h" />
+    <QtMoc Include="image.h" />
     <ClInclude Include="notes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

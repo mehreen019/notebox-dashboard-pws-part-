@@ -2,13 +2,14 @@
 #define NOTES_H
 #include<iostream>
 #include<string>
+#include "Header.h"
 using namespace std;
 
 class notes
 {
 public:
     notes();
-    notes(string title, string date, FILE* t);
+    notes(string title, string date, QString t);
     virtual ~notes();
     
     static int id;
@@ -17,7 +18,8 @@ public:
     void Settitle(string val) { title = val; }
     string Getdate() { return date; }
     void Setdate(string val) { date = val; }
-    void setFile(FILE* tempFile) { fp = tempFile; }
+    void setFile(QString tempFile) { fp = tempFile; }
+    QString getFile() { return fp; }
 
 
     void displayinfo();
@@ -28,7 +30,8 @@ protected:
 private:
     string title;
     string date;
-    FILE* fp;
+    //FILE* fp;
+    QString fp;
 };
 
 class personalNotes : public notes
@@ -37,7 +40,7 @@ private:
 
 public:
     personalNotes();
-    personalNotes(string title, string date, FILE* t);
+    personalNotes(string title, string date, QString t);
     void updateNoteInfo();
 };
 
@@ -51,7 +54,7 @@ private:
 
 public:
     schoolNotes();
-    schoolNotes(string Cat, string Topic, string sub, string title, string date, FILE* t);
+    schoolNotes(string Cat, string Topic, string sub, string title, string date, QString t);
  
     string getCategory() { return category; }
     void setCategory(string cat) { category = cat; }

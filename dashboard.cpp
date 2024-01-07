@@ -10,24 +10,63 @@ dashboard::dashboard(QWidget *parent)
 dashboard::~dashboard()
 {}
 
+int dashboard::rownumber = 1;
+
 void dashboard::addTask()
 {
 
 }
-void dashboard::addPersonalNote(string title, string date, FILE* t)
+void dashboard::addPersonalNote(string title, string date, QString t)
 {
 	personalNotes tempPers(title, date, t);
 	personal.push_back(tempPers);
 	const char* char_p = date.c_str();
-	QMessageBox::information(this, "success", char_p);
-	//qDebug() << "ok";
-	
+	//QMessageBox::information(this, "success", char_p);
+	//qDebug() << rownumber;
+	addCells(title);
 }
-void dashboard::addSclNote(string Cat, string Topic, string sub, string title, string date, FILE* tf)
+
+void dashboard::addCells(string t) 
+{
+	cell* newCell = new cell(this);
+	ui.gridLayout_2->addWidget(newCell, rownumber, 0);
+
+	newCell->setAttribute(Qt::WA_DeleteOnClose, true);
+	newCell->cellNum = rownumber-1;
+	newCell->setTitle(t);
+	allCells.push_back(newCell);
+
+	connect(newCell, SIGNAL(sendDeleteCellSignal(int)), this, SLOT(receiveDelete(int)));
+	connect(newCell, SIGNAL(sendDisplayImage(int)), this, SLOT(receiveDisplayImage(int)));
+
+	rownumber++;
+
+}
+
+void dashboard::receiveDelete(int num) {
+	for (int i = 0; i < allCells.size(); i++) {
+		if (i == num) {
+			
+		}
+	}
+}
+
+void dashboard::receiveDisplayImage(int num) {
+	for (int i = 0; i < personal.size(); i++) {
+		if (i == num) {
+			//QMessageBox::information(this, "success", "pic received");
+			img = new image(this);
+			img->finallyImageOutput(personal[i].getFile());
+		}
+	}
+
+}
+
+void dashboard::addSclNote(string Cat, string Topic, string sub, string title, string date, QString tf)
 {
 	schoolNotes tempscl(Cat, Topic, sub, title, date, tf);
 	sclNotes.push_back(tempscl);
-	QMessageBox::information(this, "success", "info loaded");
+	//QMessageBox::information(this, "success", "info loaded");
 }
 
 void dashboard::noteAddClick() {
@@ -44,14 +83,15 @@ void dashboard::submitFile() {
 
 
 
-	std::string p = picpath.toLocal8Bit().constData();
-	const char* char_p = p.c_str();
+	//std::string p = picpath.toLocal8Bit().constData();
+	//const char* char_p = p.c_str();
 	//QMessageBox::information(this, "runs", picpath);
 
-	tf = fopen(char_p, "r");
+	//tf = fopen(char_p, "r");
+	tf = picpath;
 	
 
-	if (!tf) {
+	if (tf==QString::null) {
 		//QMessageBox::information(this, "failed", "pic has not been loaded");
 	}
 }
