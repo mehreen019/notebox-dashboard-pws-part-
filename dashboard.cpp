@@ -1,38 +1,75 @@
-#include "dashboard.h"
+﻿#include "dashboard.h"
+#define filepath "E:\\coding\\projects\\QtWidgetsApplication1\\userInfo.txt"
 
 dashboard::dashboard(QWidget *parent)
-	: QMainWindow(parent)
+	: QMainWindow(parent), rownumber(0), feduprow(0), b(NULL), img(NULL)
 {
 	ui.setupUi(this); 
 	connect(ui.noteAdd, SIGNAL(clicked()), this, SLOT(noteAddClick()));
+	connect(this, SIGNAL(crossClicked()), this, SLOT(handleClose()));
 }
 
 dashboard::~dashboard()
-{}
+{
+	for (int j = 0; j < rownumber; j++)
+	{
+		delete allNotes[j];
+	}
+}
 
-int dashboard::rownumber = 1;
 
 void dashboard::addTask()
 {
 
 }
-void dashboard::addPersonalNote(string title, string date, QString t)
+void dashboard::addPersonalNote(string title, string date)
 {
-	personalNotes tempPers(title, date, t);
-	personal.push_back(tempPers);
+	const char* neww = (const char*)malloc((tf.size() + 1)* sizeof(char)); // Allocate 1 more char
+	neww = tf.c_str();          // Correct number of bytes to copy
+	//personalNotes tempPers(title, date, tf);
+	int r = rand();
+	allNotes[rownumber] = new personalNotes(title, date, tf, r);
 	const char* char_p = date.c_str();
-	//QMessageBox::information(this, "success", char_p);
+	QMessageBox::information(this, "success", neww);
 	//qDebug() << rownumber;
-	addCells(title);
+	addCells(allNotes[rownumber]->Gettitle(), r);
+	string n=display(0);
 }
 
-void dashboard::addCells(string t) 
+string dashboard::display(int num) {
+	return allNotes[num]->getFile();
+}
+
+void dashboard::addOnLoad() {
+	readFromFile();
+	char q[10];
+	sprintf(q, "%d", rownumber);
+	QMessageBox::information(this, "success", q);
+	feduprow = 1;
+	/*for (int i = 0; i < rownumber; i++) {
+		//QString qstr = QString::fromStdString();
+		addCells(allNotes[i]->getFile());
+	}*/
+}
+
+void dashboard::handleClose() {
+	
+	writeToFile();
+	//this->close();
+	QMessageBox::information(this, "success", "written to file");
+	QCoreApplication::quit();
+	//QCloseEvent::QCloseEvent();
+}
+
+void dashboard::addCells(string t, int r) 
 {
+	//if (feduprow == 0) feduprow++;
 	cell* newCell = new cell(this);
-	ui.gridLayout_2->addWidget(newCell, rownumber, 0);
+	ui.gridLayout_2->addWidget(newCell, rownumber+1, 0);
 
 	newCell->setAttribute(Qt::WA_DeleteOnClose, true);
-	newCell->cellNum = rownumber-1;
+	newCell->cellNum = rownumber;
+	newCell->unique = r;
 	newCell->setTitle(t);
 	allCells.push_back(newCell);
 
@@ -40,32 +77,57 @@ void dashboard::addCells(string t)
 	connect(newCell, SIGNAL(sendDisplayImage(int)), this, SLOT(receiveDisplayImage(int)));
 
 	rownumber++;
-
+	//feduprow++;
 }
 
+
+
 void dashboard::receiveDelete(int num) {
-	for (int i = 0; i < allCells.size(); i++) {
-		if (i == num) {
-			
+	for (int i = 0; i < rownumber; i++) {
+		if (allNotes[i]->getUnique() == num) {
+			allCells[i]->close();
+			for (int j = i; j < rownumber; j++) {
+				if (j + 1 == rownumber) break;
+
+				allNotes[j] = allNotes[j + 1];
+				allCells[j] = allCells[j + 1];
+			}
+			rownumber--;
+			break;
 		}
 	}
+}
+
+void dashboard::bufferimg() {
+	QMessageBox::information(this, "success", "ok");
+	QMessageBox::information(this, "success", allNotes[0]->Gettitle().c_str());
 }
 
 void dashboard::receiveDisplayImage(int num) {
-	for (int i = 0; i < personal.size(); i++) {
-		if (i == num) {
-			//QMessageBox::information(this, "success", "pic received");
+	char q[10];
+	sprintf(q, "%d", num);
+	string kk = allNotes[num]->getFile();
+	//bufferimg();
+	//for (int i = 0; i < rownumber; i++) {
+		//if (i == num) {
+			//p_type ptype = allNotes[i]->get_type();
+			//
 			img = new image(this);
-			img->finallyImageOutput(personal[i].getFile());
-		}
-	}
 
+			QMessageBox::information(this, "success", kk.c_str());
+			//string ft = allNotes[i]->getFile();
+			//string ft = allNotes[i]->fp;
+			//QMessageBox::information(this, "success", "pic received");
+			img->finallyImageOutput(kk.c_str());
+			//break;
+		//}
+	//}
 }
 
-void dashboard::addSclNote(string Cat, string Topic, string sub, string title, string date, QString tf)
+void dashboard::addSclNote(string Cat, string Topic, string sub, string title, string date, string tf)
 {
-	schoolNotes tempscl(Cat, Topic, sub, title, date, tf);
-	sclNotes.push_back(tempscl);
+	int r = rand();
+	allNotes[rownumber]= new schoolNotes(Cat, Topic, sub, title, date, tf, r);
 	//QMessageBox::information(this, "success", "info loaded");
 }
 
@@ -81,19 +143,18 @@ void dashboard::submitFile() {
 		this, "Open file", "C://", "JPG file(*.jpg)::PNG file(*.png)"
 	);
 
-
-
-	//std::string p = picpath.toLocal8Bit().constData();
-	//const char* char_p = p.c_str();
-	//QMessageBox::information(this, "runs", picpath);
+	string p = picpath.toLocal8Bit().constData();
+	tf = p;
+	//char* ff;
+	//strcpy(tf, p.c_str());
+	//QMessageBox::information(this, "runs", tf);
 
 	//tf = fopen(char_p, "r");
-	tf = picpath;
 	
 
-	if (tf==QString::null) {
-		//QMessageBox::information(this, "failed", "pic has not been loaded");
-	}
+	/*if (tf == "") {
+		QMessageBox::information(this, "failed", "pic has not been loaded");
+	}*/
 }
 
 void dashboard::submitSclNoteInfo() {
@@ -106,8 +167,9 @@ void dashboard::submitSclNoteInfo() {
 
 	std::string md = date.toLocal8Bit().constData();
 	//note.Setdate(md);
-
-	addPersonalNote(mt, md, tf);
+	
+	//QMessageBox::information(this, "runs", tf);
+	addPersonalNote(mt, md);
 
 	b->close();
 }
@@ -120,7 +182,165 @@ void dashboard::addDeadline()
 {
 
 }
-void dashboard::display()
-{
+
+void dashboard::readFromFile() {
+	int size;
+	string ptype;
+	ifstream inf;
+	inf.open(filepath, ios::in);
+	if (!inf)
+	{
+		QMessageBox::information(this, "failed", "couldn't read info");
+		return;
+	}
+	rownumber = 0;
+	while (true)
+	{
+		/*inf.read((char*)&ptype, sizeof(ptype));
+		if (inf.eof()) { cout << rownumber <<endl; break; }
+		if (!inf)
+		{
+			QMessageBox::information(this, "failed", "couldn't read info");
+			return;
+		}
+		switch (ptype)
+		{
+		case sclN:
+			allNotes[rownumber] = new schoolNotes;
+			size = sizeof(schoolNotes);
+			break;
+		case persN:
+			allNotes[rownumber] = new personalNotes;
+			size = sizeof(personalNotes);
+			break;
+		default: QMessageBox::information(this, "failed", "unknown class type");
+		}
+		inf.read((char*)allNotes[rownumber], size);
+		if (!inf)
+		{
+			QMessageBox::information(this, "failed", "couldn't read info");
+			return;
+		}
+		QMessageBox::information(this, "success", "cell loaded");*/
+		if (inf.eof()) { cout << rownumber << " end of file" << endl; break; }
+		inf >> ptype;
+		if (!inf)
+		{
+			cout << "can't open file2" << endl;
+			return;
+		}
+		if (ptype == "sclN") {
+			allNotes[rownumber] = new schoolNotes();
+			size = sizeof(schoolNotes);
+		}
+		else if (ptype == "persN") {
+			allNotes[rownumber] = new personalNotes();
+			size = sizeof(personalNotes);
+			cout << "type detected" << endl;
+		}
+		else cout << "unknown class type" << endl;
+
+		allNotes[rownumber]->deserialize(inf);
+
+		string t = allNotes[rownumber]->Gettitle();
+		int unique = allNotes[rownumber]->getUnique();
+		addCells(t, unique);
+		//cout << allNotes[rownumber]->Getdate() << " " << allNotes[rownumber]->getFile() << "printed from read" << endl;
+		//rownumber++;
+	}
+	inf.close();
+}
+
+void dashboard::writeToFile() {
+
+	int size;
+	ofstream ouf;
+	string ptype;
+	ouf.open(filepath, ios::binary);
+	if (!ouf)
+	{
+		//qDebug() << "\nCan't open file\n"; return;
+		QMessageBox::information(this, "failed", "couldn't write info");
+		return;
+	}
+	for (int j = 0; j < rownumber; j++)
+	{
+		/*if (typeid(*allNotes[j]) == typeid(schoolNotes)) {
+			ptype = sclN;
+		}
+		else {
+			ptype = persN;
+		}*/
+		//ptype = allNotes[j]->get_type();
+		/*ptype = sclN;
+		QMessageBox::information(this, "success", "cross clicked");
+		ouf.write((char*)&ptype, sizeof(ptype));
+
+		switch (ptype)
+		{
+		case sclN: size = sizeof(schoolNotes); break;
+		case persN: size = sizeof(personalNotes); break;
+		}
+		ouf.write((char*)(allNotes[j]), size);
+		if (!ouf)
+		{
+			//cout << "\nCan�t write to file\n"; return;
+			QMessageBox::information(this, "failed", "couldn't read info");
+			return;
+		}*/
+		ptype = allNotes[j]->get_type();
+		ouf << ptype << " ";
+		allNotes[j]->serialize(ouf);
+		if (!ouf)
+		{
+			QMessageBox::information(this, "failed", "couldn't read info");
+			return;
+		}
+
+	}
+	ouf.close();
+	/*int size;
+	int arrSize;
+	bool isScl=false;
+	ofstream ouf;
+	p_type ptype = num;
+
+	switch (ptype)
+	{
+	case sclN:
+		size = sizeof(schoolNotes);
+		arrSize = sclNotes.size();
+		isScl = true;
+		break;
+	case persN:
+		size = sizeof(personalNotes);
+		arrSize = personal.size();
+		isScl = false;
+		break;
+	}
+	ouf.open(filepath, ios::trunc | ios::binary);
+	if (!ouf)
+	{
+		qDebug() << "\nCan't open file\n"; return;
+	}
+
+	for (int j = 0; j < arrSize; j++)
+	{
+		ouf.write((char*)&ptype, sizeof(ptype));
+		if (isScl)
+		{
+			ouf.write((char*)(sclNotes[j]), size);
+		}
+		else
+		{
+			ouf.write((char*)(personal[j]), size);
+		}
+		
+		if (!ouf)
+		{
+			qDebug() << "\nCan't write to file\n"; return;
+		}
+	}*/
 
 }
+

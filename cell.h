@@ -12,6 +12,7 @@ public:
 	cell(QWidget *parent = nullptr);
 	~cell();
 	int cellNum;
+	int unique;
 	void setTitle(std::string t);
 
 public slots:
@@ -19,7 +20,7 @@ public slots:
 	void onDisplayClick();
 signals:
 	void sendDeleteCellSignal(int cellNum);
-	void sendDisplayImage(int num);
+	void sendDisplayImage(int);
 
 private:
 	Ui::cellClass ui;

@@ -7,6 +7,8 @@
 #include "button.h"
 #include "cell.h"
 #include "image.h"
+using namespace std;
+
 
 class dashboard : public QMainWindow
 {
@@ -16,29 +18,47 @@ public:
 	dashboard(QWidget *parent = nullptr);
 	~dashboard();
 
-	QString tf;
+	string tf;
 
 	void addTask();
-	void addPersonalNote(string title, string date, QString t);
-	void addSclNote(string Cat, string Topic, string sub, string title, string date, QString t);
+	void addPersonalNote(string title, string date);
+	void addSclNote(string Cat, string Topic, string sub, string title, string date, string t);
 	void addReminder();
 	void addDeadline();
-	void display();
-	void addCells(string);
+	string display(int);
+	void addCells(string, int);
 	QVector<cell*> allCells;
-	static int rownumber;
+	int rownumber;
+	int feduprow;
+
+	void readFromFile();
+	void writeToFile();
+	void addOnLoad();
+	void bufferimg();
+	notes* allNotes[1000];
+
 
 public slots:
 	void noteAddClick();
 	void submitSclNoteInfo();
 	void submitFile();
 	void receiveDelete(int num);
-	void receiveDisplayImage(int num);
+	void receiveDisplayImage(int);
+	void closeEvent(QCloseEvent* event) {
+		emit crossClicked();
+		event->ignore();
+	}
+	void handleClose();
+	
+
+signals:
+	void crossClicked();
 
 private:
 	Ui::dashboardClass ui;
-	vector<schoolNotes> sclNotes;
-	vector<personalNotes> personal;
+	//vector<notes*> sclNotes;
+	//vector<notes*> personal;
+	
 	button* b;
 	image* img;
 

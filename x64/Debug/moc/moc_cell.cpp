@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_cell_t {
-    QByteArrayData data[8];
-    char stringdata0[85];
+    QByteArrayData data[7];
+    char stringdata0[81];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,13 +37,12 @@ QT_MOC_LITERAL(1, 5, 20), // "sendDeleteCellSignal"
 QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 7), // "cellNum"
 QT_MOC_LITERAL(4, 35, 16), // "sendDisplayImage"
-QT_MOC_LITERAL(5, 52, 3), // "num"
-QT_MOC_LITERAL(6, 56, 13), // "onDeleteClick"
-QT_MOC_LITERAL(7, 70, 14) // "onDisplayClick"
+QT_MOC_LITERAL(5, 52, 13), // "onDeleteClick"
+QT_MOC_LITERAL(6, 66, 14) // "onDisplayClick"
 
     },
     "cell\0sendDeleteCellSignal\0\0cellNum\0"
-    "sendDisplayImage\0num\0onDeleteClick\0"
+    "sendDisplayImage\0onDeleteClick\0"
     "onDisplayClick"
 };
 #undef QT_MOC_LITERAL
@@ -66,12 +65,12 @@ static const uint qt_meta_data_cell[] = {
        4,    1,   37,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   40,    2, 0x0a /* Public */,
-       7,    0,   41,    2, 0x0a /* Public */,
+       5,    0,   40,    2, 0x0a /* Public */,
+       6,    0,   41,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
-    QMetaType::Void, QMetaType::Int,    5,
+    QMetaType::Void, QMetaType::Int,    2,
 
  // slots: parameters
     QMetaType::Void,

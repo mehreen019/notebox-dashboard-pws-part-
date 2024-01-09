@@ -1,7 +1,7 @@
 #include "cell.h"
 
 cell::cell(QWidget *parent)
-	: QMainWindow(parent)
+	: QMainWindow(parent), cellNum(0), unique(0)
 {
 	ui.setupUi(this);
 	connect(ui.deleteTask, SIGNAL(clicked()), this, SLOT(onDeleteClick()));
@@ -21,7 +21,7 @@ void cell::onDeleteClick() {
 	QMessageBox::StandardButton reply;
 	reply = QMessageBox::question(this, "delete confirmation", "are you sure you want to delete?", QMessageBox::Yes | QMessageBox::No);
 	if (reply == QMessageBox::Yes) {
-		emit sendDeleteCellSignal(cellNum);
+		emit sendDeleteCellSignal(unique);
 		this->close();
 	}
 }

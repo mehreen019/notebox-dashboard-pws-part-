@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include "ui_image.h"
 #include "Header.h"
+using namespace std;
 
 class image : public QMainWindow
 {
@@ -11,7 +12,7 @@ class image : public QMainWindow
 public:
 	image(QWidget *parent = nullptr);
 	~image();
-	void finallyImageOutput(QString);
+	void finallyImageOutput(const char*);
 
 private:
 	Ui::imageClass ui;

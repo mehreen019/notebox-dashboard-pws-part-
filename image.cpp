@@ -9,8 +9,9 @@ image::image(QWidget *parent)
 image::~image()
 {}
 
-void image::finallyImageOutput(QString fp) {
-	//QMessageBox::information(this, "success", "pic received");
+void image::finallyImageOutput(const char* fp) {
+	QMessageBox::information(this, "success", "pic received");
+	//QString qstr = QString::fromStdString(fp);
 	QPixmap pix(fp);
 	//ui.picLabel->setPixmap(pix.scaled(500,500,Qt::KeepAspectRatio));
 	ui.picLabel->setPixmap(pix);
