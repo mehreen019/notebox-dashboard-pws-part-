@@ -7,6 +7,7 @@
 #include "button.h"
 #include "cell.h"
 #include "image.h"
+#include "publicWorkspace.h"
 using namespace std;
 
 
@@ -38,6 +39,7 @@ public:
 	notes* allNotes[1000];
 
 
+
 public slots:
 	void noteAddClick();
 	void submitSclNoteInfo();
@@ -49,7 +51,9 @@ public slots:
 		event->ignore();
 	}
 	void handleClose();
-	
+	void uploadFile(int);
+	void toWS();
+	void backToDash();
 
 signals:
 	void crossClicked();
@@ -61,6 +65,7 @@ private:
 	
 	button* b;
 	image* img;
+	publicWorkspace* pws;
 
 	//vector<task> tasks;
 

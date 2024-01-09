@@ -2,11 +2,12 @@
 #define filepath "E:\\coding\\projects\\QtWidgetsApplication1\\userInfo.txt"
 
 dashboard::dashboard(QWidget *parent)
-	: QMainWindow(parent), rownumber(0), feduprow(0), b(NULL), img(NULL)
+	: QMainWindow(parent), rownumber(0), feduprow(0), b(NULL), img(NULL), pws(NULL)
 {
 	ui.setupUi(this); 
 	connect(ui.noteAdd, SIGNAL(clicked()), this, SLOT(noteAddClick()));
 	connect(this, SIGNAL(crossClicked()), this, SLOT(handleClose()));
+	connect(ui.ws_button, SIGNAL(clicked()), this, SLOT(toWS()));
 }
 
 dashboard::~dashboard()
@@ -22,6 +23,7 @@ void dashboard::addTask()
 {
 
 }
+
 void dashboard::addPersonalNote(string title, string date)
 {
 	const char* neww = (const char*)malloc((tf.size() + 1)* sizeof(char)); // Allocate 1 more char
@@ -33,7 +35,7 @@ void dashboard::addPersonalNote(string title, string date)
 	QMessageBox::information(this, "success", neww);
 	//qDebug() << rownumber;
 	addCells(allNotes[rownumber]->Gettitle(), r);
-	string n=display(0);
+	//string n=display(0);
 }
 
 string dashboard::display(int num) {
@@ -75,12 +77,33 @@ void dashboard::addCells(string t, int r)
 
 	connect(newCell, SIGNAL(sendDeleteCellSignal(int)), this, SLOT(receiveDelete(int)));
 	connect(newCell, SIGNAL(sendDisplayImage(int)), this, SLOT(receiveDisplayImage(int)));
+	connect(newCell, SIGNAL(sendUploadClick(int)), this, SLOT(uploadFile(int)));
 
 	rownumber++;
 	//feduprow++;
 }
 
+void dashboard::uploadFile(int num) {
+	//QMessageBox::information(this, "success", "reached to upload");
+	publicWorkspace::pubNotes[publicWorkspace::pubNoteNum] = allNotes[num];
+	//publicWorkspace::addCells();
+	publicWorkspace::pubNoteNum++;
+	publicWorkspace::writeToFile();
+	QMessageBox::information(this, "success", "uploaded");
+}
 
+void dashboard::toWS() {
+
+	if (pws == NULL) { pws = new publicWorkspace(this); pws->addOnLoad(); }
+	pws->show();
+	this->hide();
+
+	connect(pws, SIGNAL(sendToDash()), this, SLOT(backToDash()));
+}
+
+void dashboard::backToDash() {
+	this->show();
+}
 
 void dashboard::receiveDelete(int num) {
 	for (int i = 0; i < rownumber; i++) {

@@ -6,25 +6,35 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>489</width>
-    <height>383</height>
+    <width>497</width>
+    <height>395</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>dashboard</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0">
-       <widget class="QPushButton" name="noteAdd">
-        <property name="text">
-         <string>add notes</string>
-        </property>
-       </widget>
-      </item>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
      </layout>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="noteAdd">
+      <property name="text">
+       <string>add notes</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="ws_button">
+      <property name="text">
+       <string>view public workspace</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -36,7 +46,6 @@
     <bool>false</bool>
    </attribute>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

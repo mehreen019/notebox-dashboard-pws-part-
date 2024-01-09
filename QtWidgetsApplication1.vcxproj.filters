@@ -52,6 +52,12 @@
     <ClCompile Include="image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="publicWorkspace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wsCell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="notes.h">
@@ -71,6 +77,12 @@
     <QtMoc Include="image.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="publicWorkspace.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="wsCell.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="dashboard.ui">
@@ -80,6 +92,12 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="image.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="publicWorkspace.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="wsCell.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

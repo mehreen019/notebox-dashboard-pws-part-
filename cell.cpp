@@ -6,6 +6,7 @@ cell::cell(QWidget *parent)
 	ui.setupUi(this);
 	connect(ui.deleteTask, SIGNAL(clicked()), this, SLOT(onDeleteClick()));
 	connect(ui.displayImage, SIGNAL(clicked()), this, SLOT(onDisplayClick()));
+	connect(ui.upload, SIGNAL(clicked()), this, SLOT(onUploadClick()));
 }
 
 cell::~cell()
@@ -24,6 +25,10 @@ void cell::onDeleteClick() {
 		emit sendDeleteCellSignal(unique);
 		this->close();
 	}
+}
+
+void cell::onUploadClick() {
+	emit sendUploadClick(cellNum);
 }
 
 void cell::onDisplayClick() {

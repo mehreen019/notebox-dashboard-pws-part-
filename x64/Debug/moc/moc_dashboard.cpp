@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_dashboard_t {
-    QByteArrayData data[13];
-    char stringdata0[146];
+    QByteArrayData data[16];
+    char stringdata0[173];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,13 +44,17 @@ QT_MOC_LITERAL(8, 84, 19), // "receiveDisplayImage"
 QT_MOC_LITERAL(9, 104, 10), // "closeEvent"
 QT_MOC_LITERAL(10, 115, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(11, 128, 5), // "event"
-QT_MOC_LITERAL(12, 134, 11) // "handleClose"
+QT_MOC_LITERAL(12, 134, 11), // "handleClose"
+QT_MOC_LITERAL(13, 146, 10), // "uploadFile"
+QT_MOC_LITERAL(14, 157, 4), // "toWS"
+QT_MOC_LITERAL(15, 162, 10) // "backToDash"
 
     },
     "dashboard\0crossClicked\0\0noteAddClick\0"
     "submitSclNoteInfo\0submitFile\0receiveDelete\0"
     "num\0receiveDisplayImage\0closeEvent\0"
-    "QCloseEvent*\0event\0handleClose"
+    "QCloseEvent*\0event\0handleClose\0"
+    "uploadFile\0toWS\0backToDash"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,7 +64,7 @@ static const uint qt_meta_data_dashboard[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,16 +72,19 @@ static const uint qt_meta_data_dashboard[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x06 /* Public */,
+       1,    0,   69,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   55,    2, 0x0a /* Public */,
-       4,    0,   56,    2, 0x0a /* Public */,
-       5,    0,   57,    2, 0x0a /* Public */,
-       6,    1,   58,    2, 0x0a /* Public */,
-       8,    1,   61,    2, 0x0a /* Public */,
-       9,    1,   64,    2, 0x0a /* Public */,
-      12,    0,   67,    2, 0x0a /* Public */,
+       3,    0,   70,    2, 0x0a /* Public */,
+       4,    0,   71,    2, 0x0a /* Public */,
+       5,    0,   72,    2, 0x0a /* Public */,
+       6,    1,   73,    2, 0x0a /* Public */,
+       8,    1,   76,    2, 0x0a /* Public */,
+       9,    1,   79,    2, 0x0a /* Public */,
+      12,    0,   82,    2, 0x0a /* Public */,
+      13,    1,   83,    2, 0x0a /* Public */,
+      14,    0,   86,    2, 0x0a /* Public */,
+      15,    0,   87,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -89,6 +96,9 @@ static const uint qt_meta_data_dashboard[] = {
     QMetaType::Void, QMetaType::Int,    7,
     QMetaType::Void, QMetaType::Int,    2,
     QMetaType::Void, 0x80000000 | 10,   11,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    2,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -108,6 +118,9 @@ void dashboard::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 5: _t->receiveDisplayImage((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 7: _t->handleClose(); break;
+        case 8: _t->uploadFile((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->toWS(); break;
+        case 10: _t->backToDash(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -151,13 +164,13 @@ int dashboard::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 11;
     }
     return _id;
 }

@@ -28,12 +28,15 @@ class Ui_cellClass
 {
 public:
     QWidget *centralWidget;
-    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout_2;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
     QLabel *titlePlace;
-    QPushButton *displayImage;
+    QGroupBox *groupBox_2;
+    QHBoxLayout *horizontalLayout;
     QPushButton *deleteTask;
+    QPushButton *displayImage;
+    QPushButton *upload;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -42,14 +45,14 @@ public:
     {
         if (cellClass->objectName().isEmpty())
             cellClass->setObjectName(QString::fromUtf8("cellClass"));
-        cellClass->resize(477, 228);
+        cellClass->resize(563, 232);
         cellClass->setMaximumSize(QSize(563, 400));
         centralWidget = new QWidget(cellClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        horizontalLayout_2 = new QHBoxLayout(centralWidget);
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        verticalLayout_2 = new QVBoxLayout(centralWidget);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         verticalLayout = new QVBoxLayout(groupBox);
@@ -62,23 +65,37 @@ public:
 
         verticalLayout->addWidget(titlePlace);
 
-        displayImage = new QPushButton(groupBox);
-        displayImage->setObjectName(QString::fromUtf8("displayImage"));
-
-        verticalLayout->addWidget(displayImage);
-
-        deleteTask = new QPushButton(groupBox);
+        groupBox_2 = new QGroupBox(groupBox);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        horizontalLayout = new QHBoxLayout(groupBox_2);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        deleteTask = new QPushButton(groupBox_2);
         deleteTask->setObjectName(QString::fromUtf8("deleteTask"));
 
-        verticalLayout->addWidget(deleteTask);
+        horizontalLayout->addWidget(deleteTask);
+
+        displayImage = new QPushButton(groupBox_2);
+        displayImage->setObjectName(QString::fromUtf8("displayImage"));
+
+        horizontalLayout->addWidget(displayImage);
+
+        upload = new QPushButton(groupBox_2);
+        upload->setObjectName(QString::fromUtf8("upload"));
+
+        horizontalLayout->addWidget(upload);
 
 
-        horizontalLayout_2->addWidget(groupBox);
+        verticalLayout->addWidget(groupBox_2);
+
+
+        verticalLayout_2->addWidget(groupBox);
 
         cellClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(cellClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 477, 26));
+        menuBar->setGeometry(QRect(0, 0, 563, 26));
         cellClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(cellClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -97,8 +114,10 @@ public:
         cellClass->setWindowTitle(QCoreApplication::translate("cellClass", "cell", nullptr));
         groupBox->setTitle(QCoreApplication::translate("cellClass", "GroupBox", nullptr));
         titlePlace->setText(QCoreApplication::translate("cellClass", "<html><head/><body><p align=\"center\"><span style=\" color:#000000;\">TextLabel</span></p></body></html>", nullptr));
-        displayImage->setText(QCoreApplication::translate("cellClass", "display image", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("cellClass", "GroupBox", nullptr));
         deleteTask->setText(QCoreApplication::translate("cellClass", "delete task", nullptr));
+        displayImage->setText(QCoreApplication::translate("cellClass", "display image", nullptr));
+        upload->setText(QCoreApplication::translate("cellClass", "upload", nullptr));
     } // retranslateUi
 
 };

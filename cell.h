@@ -18,9 +18,11 @@ public:
 public slots:
 	void onDeleteClick();
 	void onDisplayClick();
+	void onUploadClick();
 signals:
 	void sendDeleteCellSignal(int cellNum);
 	void sendDisplayImage(int);
+	void sendUploadClick(int);
 
 private:
 	Ui::cellClass ui;
