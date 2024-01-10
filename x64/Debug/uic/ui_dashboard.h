@@ -24,9 +24,11 @@ class Ui_dashboardClass
 public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
-    QGridLayout *gridLayout_2;
+    QPushButton *reminderAdd;
     QPushButton *noteAdd;
     QPushButton *ws_button;
+    QGridLayout *gridLayout_2;
+    QPushButton *sclNoteAdd;
     QToolBar *mainToolBar;
 
     void setupUi(QMainWindow *dashboardClass)
@@ -40,12 +42,10 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout_2 = new QGridLayout();
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        gridLayout_2->setSizeConstraint(QLayout::SetNoConstraint);
+        reminderAdd = new QPushButton(centralWidget);
+        reminderAdd->setObjectName(QString::fromUtf8("reminderAdd"));
 
-        gridLayout->addLayout(gridLayout_2, 0, 0, 1, 1);
+        gridLayout->addWidget(reminderAdd, 3, 0, 1, 1);
 
         noteAdd = new QPushButton(centralWidget);
         noteAdd->setObjectName(QString::fromUtf8("noteAdd"));
@@ -55,7 +55,19 @@ public:
         ws_button = new QPushButton(centralWidget);
         ws_button->setObjectName(QString::fromUtf8("ws_button"));
 
-        gridLayout->addWidget(ws_button, 2, 0, 1, 1);
+        gridLayout->addWidget(ws_button, 4, 0, 1, 1);
+
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setSizeConstraint(QLayout::SetNoConstraint);
+
+        gridLayout->addLayout(gridLayout_2, 0, 0, 1, 1);
+
+        sclNoteAdd = new QPushButton(centralWidget);
+        sclNoteAdd->setObjectName(QString::fromUtf8("sclNoteAdd"));
+
+        gridLayout->addWidget(sclNoteAdd, 2, 0, 1, 1);
 
         dashboardClass->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(dashboardClass);
@@ -70,8 +82,10 @@ public:
     void retranslateUi(QMainWindow *dashboardClass)
     {
         dashboardClass->setWindowTitle(QCoreApplication::translate("dashboardClass", "dashboard", nullptr));
-        noteAdd->setText(QCoreApplication::translate("dashboardClass", "add notes", nullptr));
+        reminderAdd->setText(QCoreApplication::translate("dashboardClass", "add reminder", nullptr));
+        noteAdd->setText(QCoreApplication::translate("dashboardClass", "add personal notes", nullptr));
         ws_button->setText(QCoreApplication::translate("dashboardClass", "view public workspace", nullptr));
+        sclNoteAdd->setText(QCoreApplication::translate("dashboardClass", "add school notes", nullptr));
     } // retranslateUi
 
 };

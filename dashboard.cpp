@@ -5,9 +5,11 @@ dashboard::dashboard(QWidget *parent)
 	: QMainWindow(parent), rownumber(0), feduprow(0), b(NULL), img(NULL), pws(NULL)
 {
 	ui.setupUi(this); 
-	connect(ui.noteAdd, SIGNAL(clicked()), this, SLOT(noteAddClick()));
+	connect(ui.noteAdd, SIGNAL(clicked()), this, SLOT(persNoteAddClick()));
+	connect(ui.sclNoteAdd, SIGNAL(clicked()), this, SLOT(sclNoteAddClick()));
 	connect(this, SIGNAL(crossClicked()), this, SLOT(handleClose()));
 	connect(ui.ws_button, SIGNAL(clicked()), this, SLOT(toWS()));
+	connect(ui.reminderAdd, SIGNAL(clicked()), this, SLOT(toRem()));
 }
 
 dashboard::~dashboard()
@@ -18,6 +20,10 @@ dashboard::~dashboard()
 	}
 }
 
+void dashboard::toRem() {
+	w = new remWindow(this);
+	w->show();
+}
 
 void dashboard::addTask()
 {
@@ -34,7 +40,7 @@ void dashboard::addPersonalNote(string title, string date)
 	const char* char_p = date.c_str();
 	QMessageBox::information(this, "success", neww);
 	//qDebug() << rownumber;
-	addCells(allNotes[rownumber]->Gettitle(), r);
+	addPersCells(allNotes[rownumber]->Gettitle(), r);
 	//string n=display(0);
 }
 
@@ -83,6 +89,25 @@ void dashboard::addCells(string t, int r)
 	//feduprow++;
 }
 
+void dashboard::addPersCells(string t, int r)
+{
+	//if (feduprow == 0) feduprow++;
+	wsCell* newCell = new wsCell(this);
+	ui.gridLayout_2->addWidget(newCell, rownumber + 1, 0);
+
+	newCell->setAttribute(Qt::WA_DeleteOnClose, true);
+	newCell->cellNum = rownumber;
+	newCell->unique = r;
+	newCell->setTitle(t);
+	allPersCells.push_back(newCell);
+
+	connect(newCell, SIGNAL(sendDeleteCellSignal(int)), this, SLOT(receiveDelete(int)));
+	connect(newCell, SIGNAL(sendDisplayImage(int)), this, SLOT(receiveDisplayImage(int)));
+
+	rownumber++;
+	//feduprow++;
+}
+
 void dashboard::uploadFile(int num) {
 	//QMessageBox::information(this, "success", "reached to upload");
 	publicWorkspace::pubNotes[publicWorkspace::pubNoteNum] = allNotes[num];
@@ -108,17 +133,33 @@ void dashboard::backToDash() {
 void dashboard::receiveDelete(int num) {
 	for (int i = 0; i < rownumber; i++) {
 		if (allNotes[i]->getUnique() == num) {
-			allCells[i]->close();
+			//allCells[i]->close();
 			for (int j = i; j < rownumber; j++) {
 				if (j + 1 == rownumber) break;
 
 				allNotes[j] = allNotes[j + 1];
-				allCells[j] = allCells[j + 1];
+				//allCells[j] = allCells[j + 1];
 			}
 			rownumber--;
 			break;
 		}
 	}
+}
+
+void dashboard::receivePersDelete(int num) {
+	/*for (int i = 0; i < rownumber; i++) {
+		if (allNotes[i]->getUnique() == num) {
+			allPersCells[i]->close();
+			for (int j = i; j < rownumber; j++) {
+				if (j + 1 == rownumber) break;
+
+				allNotes[j] = allNotes[j + 1];
+				allPersCells[j] = allPersCells[j + 1];
+			}
+			rownumber--;
+			break;
+		}
+	}*/
 }
 
 void dashboard::bufferimg() {
@@ -151,14 +192,21 @@ void dashboard::addSclNote(string Cat, string Topic, string sub, string title, s
 {
 	int r = rand();
 	allNotes[rownumber]= new schoolNotes(Cat, Topic, sub, title, date, tf, r);
-	//QMessageBox::information(this, "success", "info loaded");
+	QMessageBox::information(this, "success", "info loaded");
+	addCells(allNotes[rownumber]->Gettitle(), r);
 }
 
-void dashboard::noteAddClick() {
+void dashboard::persNoteAddClick() {
 	
 	b = new button(this);
 	b->show();
 	
+}
+
+void dashboard::sclNoteAddClick() {
+
+	sb = new sclButton(this);
+	sb->show();
 }
 
 void dashboard::submitFile() {
@@ -180,7 +228,7 @@ void dashboard::submitFile() {
 	}*/
 }
 
-void dashboard::submitSclNoteInfo() {
+void dashboard::submitPersNoteInfo() {
 	//QMessageBox::information(this, "success", "info loaded");
 	QString title = b->ui.lineEdit_title->text();
 	QString date = b->ui.lineEdit_date->text();
@@ -195,6 +243,30 @@ void dashboard::submitSclNoteInfo() {
 	addPersonalNote(mt, md);
 
 	b->close();
+}
+
+void dashboard::submitSclNoteInfo() {
+	//QMessageBox::information(this, "success", "info loaded");
+	QString title = sb->ui.title->text();
+	QString date = sb->ui.date->text();
+	QString category = sb->ui.category->text();
+	QString topic = sb->ui.topic->text();
+	QString subject = sb->ui.subject->text();
+
+	std::string mt = title.toLocal8Bit().constData();
+	//note.Settitle(mt);
+
+	std::string md = date.toLocal8Bit().constData();
+	//note.Setdate(md);
+	std::string mc = category.toLocal8Bit().constData();
+	std::string mto = topic.toLocal8Bit().constData();
+	std::string ms = subject.toLocal8Bit().constData();
+
+
+	//QMessageBox::information(this, "runs", tf);
+	addSclNote(mc, mto, ms, mt, md, tf);
+
+	sb->close();
 }
 
 void dashboard::addReminder()
@@ -267,7 +339,14 @@ void dashboard::readFromFile() {
 
 		string t = allNotes[rownumber]->Gettitle();
 		int unique = allNotes[rownumber]->getUnique();
-		addCells(t, unique);
+
+		if (ptype == "sclN") {
+			addCells(t, unique);
+		}
+		else {
+			addPersCells(t, unique);
+		}
+		//addCells(t, unique);
 		//cout << allNotes[rownumber]->Getdate() << " " << allNotes[rownumber]->getFile() << "printed from read" << endl;
 		//rownumber++;
 	}

@@ -58,6 +58,15 @@
     <ClCompile Include="wsCell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="remWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="remEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sclButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="notes.h">
@@ -83,6 +92,15 @@
     <QtMoc Include="wsCell.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="remWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="remEdit.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="sclButton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="dashboard.ui">
@@ -98,6 +116,15 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="wsCell.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="remWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="remEdit.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="sclButton.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

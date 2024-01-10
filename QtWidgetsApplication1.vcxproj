@@ -94,6 +94,9 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="notes.cpp" />
     <ClCompile Include="publicWorkspace.cpp" />
+    <ClCompile Include="remEdit.cpp" />
+    <ClCompile Include="remWindow.cpp" />
+    <ClCompile Include="sclButton.cpp" />
     <ClCompile Include="wsCell.cpp" />
     <QtRcc Include="button.qrc" />
     <QtUic Include="button.ui" />
@@ -104,9 +107,15 @@
     <QtUic Include="dashboard.ui" />
     <QtUic Include="image.ui" />
     <QtUic Include="publicWorkspace.ui" />
+    <QtUic Include="remEdit.ui" />
+    <QtUic Include="remWindow.ui" />
+    <QtUic Include="sclButton.ui" />
     <QtUic Include="wsCell.ui" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="sclButton.h" />
+    <QtMoc Include="remEdit.h" />
+    <QtMoc Include="remWindow.h" />
     <QtMoc Include="wsCell.h" />
     <QtMoc Include="publicWorkspace.h" />
     <QtMoc Include="dashboard.h" />

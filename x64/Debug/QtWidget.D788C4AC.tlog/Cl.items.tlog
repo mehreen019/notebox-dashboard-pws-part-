@@ -3,11 +3,17 @@ E:\coding\projects\QtWidgetsApplication1\dashboard.cpp;E:\coding\projects\QtWidg
 E:\coding\projects\QtWidgetsApplication1\image.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\image.obj
 E:\coding\projects\QtWidgetsApplication1\notes.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\notes.obj
 E:\coding\projects\QtWidgetsApplication1\publicWorkspace.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\publicWorkspace.obj
+E:\coding\projects\QtWidgetsApplication1\remEdit.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\remEdit.obj
+E:\coding\projects\QtWidgetsApplication1\remWindow.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\remWindow.obj
+E:\coding\projects\QtWidgetsApplication1\sclButton.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\sclButton.obj
 E:\coding\projects\QtWidgetsApplication1\wsCell.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\wsCell.obj
 E:\coding\projects\QtWidgetsApplication1\button.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\button.obj
 E:\coding\projects\QtWidgetsApplication1\main.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\main.obj
 E:\coding\projects\QtWidgetsApplication1\x64\Debug\rcc\qrc_button.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\qrc_button.obj
 E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc\moc_button.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc_button.obj
+E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc\moc_sclButton.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc_sclButton.obj
+E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc\moc_remEdit.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc_remEdit.obj
+E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc\moc_remWindow.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc_remWindow.obj
 E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc\moc_wsCell.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc_wsCell.obj
 E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc\moc_publicWorkspace.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc_publicWorkspace.obj
 E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc\moc_dashboard.cpp;E:\coding\projects\QtWidgetsApplication1\x64\Debug\moc_dashboard.obj

@@ -5,7 +5,7 @@ button::button(QWidget *parent)
 { 
     ui.setupUi(this);
     connect(ui.upload, SIGNAL(clicked()), parent, SLOT(submitFile()));
-    connect(ui.submit_info, SIGNAL(clicked()), parent, SLOT(submitSclNoteInfo()));
+    connect(ui.submit_info, SIGNAL(clicked()), parent, SLOT(submitPersNoteInfo()));
 }
 
 button::~button()

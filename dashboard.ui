@@ -15,6 +15,27 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="0">
+     <widget class="QPushButton" name="reminderAdd">
+      <property name="text">
+       <string>add reminder</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="noteAdd">
+      <property name="text">
+       <string>add personal notes</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="ws_button">
+      <property name="text">
+       <string>view public workspace</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="sizeConstraint">
@@ -22,17 +43,10 @@
       </property>
      </layout>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="noteAdd">
-      <property name="text">
-       <string>add notes</string>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="0">
-     <widget class="QPushButton" name="ws_button">
+     <widget class="QPushButton" name="sclNoteAdd">
       <property name="text">
-       <string>view public workspace</string>
+       <string>add school notes</string>
       </property>
      </widget>
     </item>
